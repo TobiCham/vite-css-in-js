@@ -1,6 +1,6 @@
 {
 	"name": "vite-css-in-js",
-	"version": "1.0.0",
+	"version": "1.2.0",
 	"description": "Resolves css tagged templates to css files within Javascript",
 	"main": "index.mjs",
 	"author": "Tobi Chammings",
@@ -23,5 +23,8 @@
 	},
 	"devDependencies": {
 		"vite": ">2.0.0"
-	}
+	},
+	"keywords": [
+		"vite", "plugin", "react", "vue", "css"
+	]
 }

@@ -20,7 +20,7 @@ npm install -D vite-css-in-js
 ```ts
 //vite.config.ts
 
-import { createCSSJSImportPlugin } from "vite-css-in-js/plugin"
+import { createCSSJSImportPlugin } from "vite-css-in-js/plugin/index.js"
 
 export default defineConfig({
   plugins: [
