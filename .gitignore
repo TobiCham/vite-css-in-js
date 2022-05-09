@@ -1,4 +1,6 @@
 node_modules/
 .vscode/
 .idea/
+dist/
 *.iml
+*.tgz

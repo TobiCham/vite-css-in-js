@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"lib": [],
+		"target": "ES2016",
+		"importsNotUsedAsValues": "error",
+
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": ["plugin/**/*"]
+}
