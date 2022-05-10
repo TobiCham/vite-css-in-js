@@ -1,9 +1,11 @@
 # Vite CSS in JS
+
 A CSS in JavaScript plugin which allows developers to write their CSS within JavaScript, while <strong>outputting to actual CSS files</strong> when bundling and <strong>avoiding class name conflicts</strong>.
 
 Originally designed for use with JSX and <strong>React</strong> or <strong>VueJs</strong>, but can be used with <strong>any framework</strong>.
 
 ## Installation
+
 ### 1. Install the package:
 
 ```sh
@@ -34,20 +36,20 @@ import { css } from "vite-css-in-js"
 
 //Variable will contain the class name of the specified styles
 const buttonStyles = css`
-	color: white;
-	background-color: royalblue;
-	border: 1px solid #1c48ce;
+  color: white;
+  background-color: royalblue;
+  border: 1px solid #1c48ce;
 
-	font-size: 1.25rem;
-	padding: 0.5rem 2rem;
-	border-radius: 1rem;
+  font-size: 1.25rem;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
 
-	cursor: pointer;
+  cursor: pointer;
 
-	/* Component selectors & nesting is permitted */
-	&:hover {
-		background-color: #587adf;
-	}
+  /* Component selectors & nesting is permitted */
+  &:hover {
+    background-color: #587adf;
+  }
 `
 
 //React
@@ -55,9 +57,9 @@ export const MyButton = () => <button className={buttonStyles}>Click Me!</button
 
 //Vue
 export const MyButton = defineComponent({
-	render() {
-		return <button class={buttonStyles}>Click Me!</button>
-	},
+  render() {
+    return <button class={buttonStyles}>Click Me!</button>
+  },
 })
 ```
 
@@ -83,6 +85,7 @@ export const MyButton = defineComponent({
          return <button class={buttonStyles}>Click Me!</button>
       },
    })
+
    ```
 
    ```css
@@ -101,9 +104,11 @@ export const MyButton = defineComponent({
       background-color: #587adf;
    }
    ```
+
 </details>
 
 ## VSCode
+
 When using with VSCode, its highly recommended to use the following plugin to enable rich CSS integration:
 https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components
 
@@ -115,9 +120,9 @@ Only string constants with no variable substitutions can be transformed. Code su
 
 ```jsx
 //Not allowed!
-const color = "green";
+const color = "green"
 const styles = css`
-	background-color: ${color};
+  background-color: ${color};
 `
 ```
 
@@ -125,7 +130,7 @@ If you need to utilize conditional styles, you may want to consider direct eleme
 
 ### 2. Style Ordering
 
-Styles are ordered based on the order they appear in the syntax tree, but should be intuitive if you keep your code organized. 
+Styles are ordered based on the order they appear in the syntax tree, but should be intuitive if you keep your code organized.
 
 In the following example, the text will be underlined and dark green in color:
 
@@ -133,21 +138,22 @@ In the following example, the text will be underlined and dark green in color:
 import { css } from "vite-css-in-js"
 
 const initialStyles = css`
-   text-decoration: underline;
-   color: red;
+  text-decoration: underline;
+  color: red;
 `
 
 //Declared later so will override previous styles
 const overrideStyles = css`
-   color: darkgreen;
+  color: darkgreen;
 `
 
 //React
 export const MyText = () => <p className={initialStyles + " " + overrideStyles}>Hello World!</p>
 ```
 
-All styles get imported from the bundler's point of view at the same position as the `vite-css-in-js` import. 
+All styles get imported from the bundler's point of view at the same position as the `vite-css-in-js` import.
 Here is an example of how the internals work to illustrate the point:
+
 ```jsx
 /* MyText.jsx */
 import "themes/material.css"
@@ -155,38 +161,41 @@ import { css } from "vite-css-in-js"
 import "./company-branding.css"
 
 const textStyles = css`
-   color: lime;
-   background-color: hotpink;
-   font-family: 'Comic Sans MS';
+  color: lime;
+  background-color: hotpink;
+  font-family: "Comic Sans MS";
 `
 
 const extraStyles = css`
-   text-decoration: underline;
+  text-decoration: underline;
 `
 
 export const MyText = () => <p className={textStyles + " " + extraStyles}>Hello World!</p>
 ```
 
 Output:
+
 ```jsx
 import "themes/material.css"
 
 //Synthetic CSS imports get placed where the original css import was
-import "vite-css-in-js@text_xCUP6R0.css";
-import "vite-css-in-js@extra_zewBme7.css";
+import "vite-css-in-js@text_xCUP6R0.css"
+import "vite-css-in-js@extra_zewBme7.css"
 
 import "./company-branding.css"
 
-const textStyles = "text_xCUP6R0";
-const extraStyles = "extra_zewBme7";
+const textStyles = "text_xCUP6R0"
+const extraStyles = "extra_zewBme7"
 
 export const MyText = () => <p className={textStyles + " " + extraStyles}>Hello World!</p>
 ```
 
 ### 3. CSS Imports are currently synthetic
-All `css` import statements from `vite-css-in-js` will be removed via the Vite plugin at compile time to facilitate CSS generation. 
+
+All `css` import statements from `vite-css-in-js` will be removed via the Vite plugin at compile time to facilitate CSS generation.
 Do not use the import for purposes other than creating styles.
 
 ### 4. Class names are not guaranteed to be stable
-Class names for styles are not guaranteed to be stable, and will certainly change whenever the contents of the styles is changed. 
+
+Class names for styles are not guaranteed to be stable, and will certainly change whenever the contents of the styles is changed.
 You should not depend on a specific value for the generated class name
