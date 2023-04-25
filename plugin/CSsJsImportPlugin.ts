@@ -25,7 +25,7 @@ export const optionsWithDefaults = (options: CssImportPluginOptions): Required<C
 		cache = new DefaultCssCache(),
 		classNameGenerator = new DefaultClassNameGenerator(),
 		stylisPlugins = [stringify],
-		babelOptions = {},
+		babelOptions = { sourceMaps: true },
 	} = options
 
 	return {

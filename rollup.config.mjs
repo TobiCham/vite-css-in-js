@@ -12,6 +12,7 @@ export default [
 	},
 	{
 		input: "plugin/index.ts",
+		external: ["@babel/core", "@babel/types", "stylis", "sha.js"],
 		plugins: [typescript()],
 		output: [
 			{
